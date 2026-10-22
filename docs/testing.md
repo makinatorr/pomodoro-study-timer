@@ -91,9 +91,9 @@ Status: ✅ pass · ❌ fail · ⏳ not tested yet
 ### F4 – Picture-in-picture
 
 The Claude app's built-in browser has the feature but cannot open the window
-("Internal error: no window"). Checks 1–6 were run there with the pop-out
-window replaced by a frame of the same size in the page, which runs the same code.
-They still need a run in real desktop Chrome.
+("Internal error: no window"). Checks 1–6d were run there with the pop-out
+window replaced by a frame of the same size in the page, which runs the same
+code. Checks 7–8 I ran myself in real desktop Chrome.
 
 | # | Check | Result | Notes |
 |---|---|---|---|
@@ -107,8 +107,8 @@ They still need a run in real desktop Chrome.
 | 6b | Setting off: Light the fuse doesn't open it | ✅ 2026-10-23 | In the frame |
 | 6c | Setting on in a browser that can't open it: timer starts, no error message | ✅ 2026-10-23 | Built-in browser |
 | 6d | Mini window can't be scrolled, even while the boom burst flies past its edges | ✅ 2026-10-23 | In the frame: content 236 px tall during the burst in a 148 px window, scroll stays at 0 |
-| 7 | Real window in desktop Chrome: opens, can be dragged and resized, bomb and time scale; clicking it brings the tab to the front | ⏳ | |
-| 8 | Closing the window with its own close button doesn't change the timer | ⏳ | |
+| 7 | Real window in desktop Chrome: opens, can be dragged and resized, bomb and time scale; clicking it brings the tab to the front | ✅ 2026-10-23 | Tested by me in desktop Chrome |
+| 8 | Closing the window with its own close button doesn't change the timer | ✅ 2026-10-23 | Tested by me in desktop Chrome |
 | 9 | Mini window open 30+ min with the main tab in the background: time stays right | ⏳ | |
 | 10 | Firefox and Safari: Pop out button hidden | ⏳ | |
 
@@ -118,3 +118,8 @@ They still need a run in real desktop Chrome.
 |---|---|---|---|
 | 2026-10-22 | Settings fields not aligned (one had no "min" unit); native number spinners looked bad on hover; close button showed a big focus ring when the panel opened | My own review of the panel | Custom − / + steppers of equal width, shorter "Long break after … sessions" label, focus moves to the panel title on open |
 | 2026-10-22 | Local server could not start from the app's preview launcher (`PermissionError` reading the Desktop folder, a macOS privacy restriction) | Starting the dev server | Start it from the terminal with `npm start` instead |
+| 2026-10-22 | − / + buttons ignored the next Enter or Space after holding a button and dragging the pointer off it | Code review for bloat and duplicates | Key presses always step; only a held pointer skips the extra step |
+| 2026-10-22 | Renaming a course and pressing Tab lost keyboard focus (the whole list was rebuilt) | Testing the Courses panel | A rename keeps the list and only updates the name |
+| 2026-10-22 | After a rejected course name, the next name was typed after the old text | Testing the Courses panel | The field selects its text after an error |
+| 2026-10-22 | The browser ran old JavaScript after changes (the local server allows caching) | Testing the pop-out | Reload the files; Cmd+Shift+R in Chrome |
+| 2026-10-23 | The pop-out could be scrolled while the boom burst flew past its edges | Testing the pop-out after I asked for no scrolling | Scrolling turned off in the pop-out |

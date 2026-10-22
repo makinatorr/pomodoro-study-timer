@@ -136,6 +136,27 @@ brand.
 
 ---
 
+## 2026-10-22 – Cleanup: bloat, duplicate code and comments
+
+**What I asked:** Whether the code was clean in terms of bloat, duplicate
+code and comments, after the redesign.
+
+**What the AI found:** The code was mostly clean, with a few leftovers:
+
+- A real bug in the − / + buttons: after holding a button and dragging the
+  pointer off it, the next Enter or Space was ignored.
+- Old "pomodoro" names left over from before the rename (package name,
+  notification tag).
+- Repeated CSS rules, eight lines that could be one inline value each, and a
+  setting passed to a function that already used it as the default.
+- The testing checklist still used the old button names (Pause, Resume).
+
+**What I changed:** I had the AI fix all of these and checked them in the
+browser before committing. I left the large embedded metadata in the logo
+files as it is, since it records that the files were made with AI.
+
+---
+
 ## 2026-10-22 – F2 courses and F3 stats
 
 **What I asked:** Build F2 (courses and session log). I also asked for a view
@@ -237,6 +258,29 @@ movable anywhere.
 - I asked what the small buttons and the line at the bottom were. The line
   was the keyboard shortcut hint, which I didn't want on the page; it was
   removed, and the shortcuts still work.
+
+---
+
+## 2026-10-23 – Publishing and README
+
+**What I asked:** Publish the app on GitHub Pages and write the README for
+the submission.
+
+**What the AI produced:**
+
+- GitHub Pages turned on from the `main` branch, with no build step. The AI
+  opened the live site and checked that all files load with no errors.
+- The README: what the app does and why, the demo and source links,
+  features, how to run and test it, and how AI was used.
+
+**What was wrong / what I changed:**
+
+- The first README draft said the course-tagging idea came from the AI,
+  because an earlier log entry said so. It was my idea, so I had both
+  corrected.
+- I added that I made the logo with AI.
+- I tested the real pop-out window in desktop Chrome myself (`testing.md`).
+- I submitted the demo and source links on 23 October.
 
 ---
 
