@@ -1,4 +1,4 @@
-# Spec: Pomodoro study timer (working name)
+# Spec: Thinking Time Bomb
 
 DAVE3625 – Mandatory Assignment 3: Vibe Coding. Solo project.
 
@@ -18,27 +18,45 @@ see, per course, how much focused time they put in this week.
 A Pomodoro timer where every focus session is tagged with a course. Completed
 sessions are logged, and a stats view shows focus time per course.
 
+## Look and feel
+
+Brand: **Thinking Time Bomb** (logo handoff: icon that is a clock and a bomb,
+slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
+
+- The timer is drawn as the bomb-clock: the fuse burns down, the hand sweeps
+  round and a light-blue wedge shows the time left.
+- The spark flickers while running; the bomb wobbles in the last 10 seconds
+  of a focus session; a "boom" burst plays when a focus session ends.
+- Focus uses the light (or chosen) theme; breaks always use the dark screen.
+- Playful copy: Light the fuse / Hold / Relight / Re-arm / Defuse.
+- Animations are turned off when the system asks for reduced motion.
+
 ## Features and acceptance criteria
 
 ### F1 – Timer
 
 - Three phases: **focus** (default 25 min), **short break** (default 5 min),
   **long break** (default 15 min).
-- After every 4th completed focus session the next break is a long break;
-  otherwise it is a short break. After any break the next phase is focus.
+- After every Nth completed focus session (default 4, configurable 2–8) the
+  next break is a long break; otherwise it is a short break. After any break the next phase is focus.
 - Controls: start, pause, resume, reset (current phase back to full length),
   skip (jump to the next phase).
 - A skipped or reset focus session is **not** logged as completed.
 - When a phase ends: a sound plays, a browser notification is shown (if
-  permission was granted), and the next phase is ready but does not start
-  automatically.
+  permission was granted), and the next phase is ready. It starts
+  automatically only if the matching auto-start setting is on (breaks and
+  focus have separate switches, both off by default).
 - The remaining time is shown in the page and in the browser tab title.
 - Remaining time is calculated from timestamps, not by counting ticks, so the
   timer stays correct when the tab is in the background or the laptop sleeps.
 - Reloading the page mid-phase restores the phase, remaining time and
   running/paused state.
-- Durations are configurable: focus 1–90 min, breaks 1–30 min. Invalid input
-  is rejected with a message; the previous value is kept.
+- Settings panel (gear icon): durations (focus 1–90 min, breaks 1–30 min),
+  sessions before a long break (2–8), auto-start switches, sound (chime, bell
+  or off) with volume and a test button, appearance (system, light, dark).
+  Invalid input is rejected with a message and nothing is saved; Cancel
+  discards changes.
+- Keyboard shortcuts: Space start/pause, R reset, S skip.
 
 ### F2 – Courses and session log
 
@@ -77,7 +95,6 @@ sessions are logged, and a stats view shows focus time per course.
 
 - Picture-in-picture fallback for browsers without document picture-in-picture
   (for example Safari): the timer drawn on a video, display only.
-- Dark mode.
 - Keyboard shortcuts (space = start/pause, S = skip).
 - Installable on a phone (PWA).
 - Export the session log as CSV.
@@ -120,5 +137,4 @@ sessions are logged, and a stats view shows focus time per course.
 
 ## Open decisions
 
-- App name.
-- Whether breaks should optionally auto-start (default: no).
+- None at the moment.
