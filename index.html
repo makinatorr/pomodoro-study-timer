@@ -39,8 +39,8 @@
     <div id="bomb-wrap" class="bomb-wrap">
       <svg class="bomb" viewBox="0 0 48 60" aria-hidden="true">
         <path class="fuse-track" d="M24 17 Q24 8 32 7"/>
-        <path id="fuse" class="fuse" d="M24 17 Q24 8 32 7"/>
-        <g id="spark" class="spark">
+        <path class="fuse" d="M24 17 Q24 8 32 7"/>
+        <g class="spark">
           <g class="spark-inner">
             <polygon points="0,-5 2,0 0,5 -2,0"/>
             <polygon points="-5,0 0,-2 5,0 0,2"/>
@@ -48,8 +48,8 @@
         </g>
         <rect class="bomb-top" x="18.5" y="15" width="11" height="7" rx="1.5"/>
         <circle class="face" cx="24" cy="38" r="17"/>
-        <path id="wedge" class="wedge"/>
-        <rect id="hand" class="hand" x="22" y="27" width="4" height="12.5" rx="2"/>
+        <path class="wedge"/>
+        <rect class="hand" x="22" y="27" width="4" height="12.5" rx="2"/>
         <circle class="pin" cx="24" cy="38" r="3"/>
       </svg>
       <div class="burst" aria-hidden="true">
@@ -70,6 +70,7 @@
       <div class="secondary">
         <button id="reset" class="btn-ghost" type="button">Re-arm</button>
         <button id="skip" class="btn-ghost" type="button">Defuse</button>
+        <button id="pop-out" class="btn-ghost" type="button" hidden>Pop out</button>
       </div>
     </div>
 
@@ -156,6 +157,9 @@
         </label>
         <label class="field">Auto-start next focus
           <input name="autoStartFocus" type="checkbox" role="switch" class="switch">
+        </label>
+        <label class="field">Pop out when the fuse is lit
+          <input name="autoPopOut" type="checkbox" role="switch" class="switch">
         </label>
       </fieldset>
 

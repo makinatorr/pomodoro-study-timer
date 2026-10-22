@@ -182,6 +182,60 @@ the same step.
 
 ---
 
+## 2026-10-22 – F4: pop-out mini timer
+
+**What I asked:** Build F4. While it was being built I asked for the mini
+window to show the Thinking Time Bomb with the time next to it, and to be
+movable anywhere.
+
+**What the AI produced:**
+
+- `js/mini.js`: a "Pop out" button opens an always-on-top window (Document
+  Picture-in-Picture) with a copy of the animated bomb, the phase, the time,
+  the course and two buttons (later slimmed down, see below). It reuses the page's stylesheet and is redrawn
+  by the same code as the page, so the two always match. "Pop in" closes it.
+- `js/bomb.js` now draws any copy of the bomb, so the page and the pop-out
+  each animate their own.
+- The window can be dragged anywhere on screen and resized; the bomb and the
+  time scale with it.
+
+**Design choices the AI explained:**
+
+- The display update runs from the pop-out window's own timer, because
+  browsers slow down timers in background tabs, but the pop-out stays
+  visible.
+- The button is hidden in browsers without the feature (Firefox, Safari).
+
+**What was wrong / what I tested:**
+
+- The Claude app's built-in browser says it supports the feature but cannot
+  open the window. The AI found the real error ("no window") and changed the
+  message to say the pop-out works in desktop Chrome and Edge.
+- To test anyway, the AI temporarily replaced the window with a frame of the
+  same size inside the page. Buttons, matching times, the break screen, the
+  boom at the end of a session and closing all worked. A real Chrome run is
+  still on my list (`testing.md`).
+- The local server let the browser cache old JavaScript, so the first test
+  ran the old code. Reloading the files fixed it.
+
+**What I changed after reviewing it:**
+
+- I asked whether the pop-out could be just the icon. The AI explained that
+  the browser always draws the window frame, but the content can be minimal.
+  The mini window now shows only the bomb, the phase and the time, without
+  buttons or course name, and clicking it goes back to the timer's tab.
+- I asked whether the pop-out could open by itself when I switch to another
+  tab. The AI explained that browsers only allow it on a click or key press
+  (Chrome's automatic picture-in-picture is only for pages playing media or
+  in video calls) and suggested opening it on the "Light the fuse" click
+  instead. It is now a setting, on by default. If the browser can't open the
+  window, the timer starts anyway with no error message.
+- I asked that the pop-out can't be scrolled. While testing, the AI found
+  that the boom burst made the content taller than the window, which made it
+  scrollable; scrolling is now turned off there.
+
+---
+
 <!-- Template for later entries:
 
 ## YYYY-MM-DD – <topic>

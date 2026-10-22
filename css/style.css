@@ -39,6 +39,9 @@ body[data-mode="dark"] {
 
 * { box-sizing: border-box; }
 
+/* Elements like .field set their own display, which would override hidden. */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -616,6 +619,35 @@ legend,
 }
 
 .drawer-actions .btn-primary { min-width: 120px; padding: 12px 24px; }
+
+/* Pop-out window: the stylesheet is shared with the page. */
+
+/* Nothing to scroll: the burst may fly past the edges, but stays clipped. */
+body.mini-body { grid-template-rows: 1fr; overflow: hidden; }
+
+/* The whole window is one button back to the tab: bomb on the left, phase
+   and time on the right. Sizes follow the window, so resizing scales both. */
+.mini {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  align-content: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 10px 16px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.mini:focus-visible { outline-offset: -4px; }
+
+/* The bomb is 4:5, so its height is capped by the window height. */
+.mini .bomb-wrap { width: min(36vw, (100vh - 20px) * 0.8, 220px); margin: 0; }
+
+.mini-info { display: grid; gap: 2px; min-width: 0; }
+.mini .mini-time { font-size: clamp(2rem, min(15vw, 30vh), 6rem); }
 
 /* Courses drawer */
 

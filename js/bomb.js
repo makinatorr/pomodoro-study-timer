@@ -4,12 +4,6 @@ const CX = 24;
 const CY = 38;
 const R = 15.25; // inside the face's outline
 
-const fuse = document.getElementById('fuse');
-const spark = document.getElementById('spark');
-const wedge = document.getElementById('wedge');
-const hand = document.getElementById('hand');
-const fuseLength = fuse.getTotalLength();
-
 function pointAt(degrees) {
   const rad = (degrees * Math.PI) / 180;
   return `${CX + R * Math.sin(rad)} ${CY - R * Math.cos(rad)}`;
@@ -25,17 +19,25 @@ function wedgePath(angle) {
   return `M${CX} ${CY} L${pointAt(angle)} A${R} ${R} 0 ${largeArc} 1 ${pointAt(360)}Z`;
 }
 
+// Returns a draw(progress) function for the bomb inside `wrapper`, so the
+// page and the pop-out window can each draw their own copy.
 // progress: 0 at the start of a phase, 1 when it runs out.
-export function drawBomb(progress) {
-  const angle = progress * 360;
-  const fuseLeft = fuseLength * (1 - progress);
-  const tip = fuse.getPointAtLength(fuseLeft);
+export function bombDrawer(wrapper) {
+  const [fuse, spark, wedge, hand] = ['.fuse', '.spark', '.wedge', '.hand']
+    .map(selector => wrapper.querySelector(selector));
+  const fuseLength = fuse.getTotalLength();
 
-  fuse.style.strokeDasharray = `${fuseLeft} ${fuseLength}`;
-  spark.setAttribute('transform', `translate(${tip.x} ${tip.y})`);
-  spark.style.opacity = progress < 1 ? 1 : 0;
-  hand.setAttribute('transform', `rotate(${angle} ${CX} ${CY})`);
-  wedge.setAttribute('d', wedgePath(angle));
+  return (progress) => {
+    const angle = progress * 360;
+    const fuseLeft = fuseLength * (1 - progress);
+    const tip = fuse.getPointAtLength(fuseLeft);
+
+    fuse.style.strokeDasharray = `${fuseLeft} ${fuseLength}`;
+    spark.setAttribute('transform', `translate(${tip.x} ${tip.y})`);
+    spark.style.opacity = progress < 1 ? 1 : 0;
+    hand.setAttribute('transform', `rotate(${angle} ${CX} ${CY})`);
+    wedge.setAttribute('d', wedgePath(angle));
+  };
 }
 
 export function explode(wrapper) {

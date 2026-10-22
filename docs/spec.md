@@ -52,8 +52,9 @@ slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
 - Reloading the page mid-phase restores the phase, remaining time and
   running/paused state.
 - Settings panel (gear icon): durations (focus 1–90 min, breaks 1–30 min),
-  sessions before a long break (2–8), auto-start switches, sound (chime, bell
-  or off) with volume and a test button, appearance (system, light, dark).
+  sessions before a long break (2–8), auto-start switches, "Pop out when the
+  fuse is lit" (only where F4 works), sound (chime, bell or off) with volume
+  and a test button, appearance (system, light, dark).
   Invalid input is rejected with a message and nothing is saved; Cancel
   discards changes.
 - Keyboard shortcuts: Space start/pause, R reset, S skip.
@@ -83,18 +84,27 @@ slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
 
 ### F4 – Picture-in-picture mini timer
 
-- A "Pop out" button opens a small always-on-top window showing the remaining
-  time, the current phase and the course, so the timer stays visible while the
-  user works in other tabs or apps.
-- The mini window has pause/resume and skip buttons that control the same
-  timer as the main page.
+- A "Pop out" button opens a small always-on-top window showing only the
+  animated bomb, the current phase and the remaining time, so the timer stays
+  visible while the user works in other tabs or apps.
+- The user can drag the window anywhere on screen and resize it; the bomb and
+  the time scale with the window. The browser always draws the window's frame
+  and top bar; a web page can't remove them.
+- Clicking the mini window closes it and brings the timer's tab back to the
+  front. The "Pop in" button on the page also closes it.
 - The mini window and the main page always show the same time.
 - When a phase ends while the mini window is open, it shows the new phase.
 - Closing the mini window does not stop or change the timer.
-- The window can only be opened by a click (browser rule), never
-  automatically.
+- The window can only be opened by a click or key press (browser rule). It
+  opens from the "Pop out" button, and also when a focus session is started
+  if the setting "Pop out when the fuse is lit" is on (default on). It can't
+  open by itself when the user switches tabs; browsers block that.
+- The mini window can't be scrolled.
 - In browsers that do not support it, the "Pop out" button is hidden and the
   rest of the app works as normal.
+- If the browser has the feature but still refuses to open the window (seen
+  in some embedded browsers), a message says it works in desktop Chrome and
+  Edge.
 
 ### Stretch goals (only if F1–F4 are done and tested)
 

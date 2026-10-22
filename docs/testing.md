@@ -90,7 +90,27 @@ Status: ✅ pass · ❌ fail · ⏳ not tested yet
 
 ### F4 – Picture-in-picture
 
-⏳ Not built yet.
+The Claude app's built-in browser has the feature but cannot open the window
+("Internal error: no window"). Checks 1–6 were run there with the pop-out
+window replaced by a frame of the same size in the page, which runs the same code.
+They still need a run in real desktop Chrome.
+
+| # | Check | Result | Notes |
+|---|---|---|---|
+| 1 | Pop out shows only the bomb, phase and time; button on the page changes to "Pop in" | ✅ 2026-10-23 | In the frame, 280×150 |
+| 2 | Times in the mini window and on the page match while running | ✅ 2026-10-22 | In the frame; 24:58 in both |
+| 3 | Skipping focus: mini window switches to the dark break screen | ✅ 2026-10-22 | In the frame, skipped with the Defuse button the first version of the mini window had |
+| 4 | Focus ends with the mini window open: boom in both, mini shows the break | ✅ 2026-10-22 | In the frame; no errors |
+| 5 | Clicking the mini window closes it; phase and time unchanged | ✅ 2026-10-23 | In the frame |
+| 6 | Browser that can't open it: message "works in desktop Chrome and Edge" | ✅ 2026-10-22 | Built-in browser |
+| 6a | Light the fuse with "Pop out when the fuse is lit" on: pop-out opens from that click; Hold and Relight don't open a second one | ✅ 2026-10-23 | In the frame; the browser counted it as part of the click |
+| 6b | Setting off: Light the fuse doesn't open it | ✅ 2026-10-23 | In the frame |
+| 6c | Setting on in a browser that can't open it: timer starts, no error message | ✅ 2026-10-23 | Built-in browser |
+| 6d | Mini window can't be scrolled, even while the boom burst flies past its edges | ✅ 2026-10-23 | In the frame: content 236 px tall during the burst in a 148 px window, scroll stays at 0 |
+| 7 | Real window in desktop Chrome: opens, can be dragged and resized, bomb and time scale; clicking it brings the tab to the front | ⏳ | |
+| 8 | Closing the window with its own close button doesn't change the timer | ⏳ | |
+| 9 | Mini window open 30+ min with the main tab in the background: time stays right | ⏳ | |
+| 10 | Firefox and Safari: Pop out button hidden | ⏳ | |
 
 ## Bugs found
 
