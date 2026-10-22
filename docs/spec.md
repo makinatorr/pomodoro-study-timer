@@ -57,7 +57,8 @@ slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
   and a test button, appearance (system, light, dark).
   Invalid input is rejected with a message and nothing is saved; Cancel
   discards changes.
-- Keyboard shortcuts: Space start/pause, R reset, S skip.
+- Keyboard shortcuts: Space start/pause, R reset, S skip. They work but are
+  not shown on the page, to keep it clean.
 
 ### F2 – Courses and session log
 

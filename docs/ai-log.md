@@ -233,6 +233,9 @@ movable anywhere.
 - I asked that the pop-out can't be scrolled. While testing, the AI found
   that the boom burst made the content taller than the window, which made it
   scrollable; scrolling is now turned off there.
+- I asked what the small buttons and the line at the bottom were. The line
+  was the keyboard shortcut hint, which I didn't want on the page; it was
+  removed, and the shortcuts still work.
 
 ---
 
