@@ -65,13 +65,18 @@ slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
 - When a focus session completes, an entry is saved with: course, start time,
   end time and duration.
 - Deleting a course keeps its logged sessions (shown as the old course name).
+  Adding a course with the name of a deleted one brings it back, so old and
+  new sessions count together.
+- The course of a focus session that is running or paused can't be changed or
+  deleted.
 - All data is stored locally in the browser. Nothing is sent to a server.
 
 ### F3 – Stats
 
 - **Today:** number of completed focus sessions and total focus minutes.
-- **This week (Monday–Sunday):** focus minutes per course, sorted highest
-  first, shown as a simple bar chart.
+- **Time per course:** focus time per course in hours and minutes, sorted
+  highest first, shown as a simple bar chart. A switch shows either **this
+  week** (Monday–Sunday) or **all time**.
 - **Streak:** consecutive days with at least one completed focus session. If
   there is no session yet today, the streak counts up to yesterday.
 - A session counts towards the local date on which it **ended**.

@@ -6,6 +6,8 @@ import {
 import { playSound, unlockSound, askNotificationPermission, notify } from './alerts.js';
 import { drawBomb, explode } from './bomb.js';
 import { setupStepper } from './stepper.js';
+import { load, save } from './storage.js';
+import { selectedCourse, logSession, setLocked, askForCourse } from './study.js';
 
 const STORAGE_KEY = 'ttb.timer.v1';
 const PREFS_KEY = 'ttb.prefs.v1';
@@ -44,24 +46,6 @@ function isValidState(saved) {
   return PHASE_LABELS[saved?.phase] && saved.settings && typeof saved.durationMs === 'number';
 }
 
-function load(key, isValid) {
-  try {
-    const saved = JSON.parse(localStorage.getItem(key));
-    if (isValid(saved)) return saved;
-  } catch {
-    // Corrupt or blocked storage: use defaults.
-  }
-  return null;
-}
-
-function save(key, value) {
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
-    // Blocked storage (private mode): works, but not across reloads.
-  }
-}
-
 function setState(next, message = '') {
   state = next;
   el.status.textContent = message;
@@ -88,13 +72,16 @@ function update() {
 
 function onPhaseComplete(next, completed, onTime, now) {
   const wasFocus = completed.phase === FOCUS;
+  if (wasFocus) logSession(completed);
   const message = !wasFocus
     ? "Break's over. Ready to light the next fuse?"
     : next.phase === LONG_BREAK
       ? `Boom! ${next.settings.longBreakEvery} sessions down. Take a long break.`
-      : `Boom! Session done. Take ${next.settings.shortBreakMin} minutes.`;
+      : `Boom! Session logged. Take ${next.settings.shortBreakMin} minutes.`;
+  // Focus never starts by itself without a course.
+  const autoStart = onTime && shouldAutoStart(next) && (wasFocus || selectedCourse());
 
-  setState(onTime && shouldAutoStart(next) ? start(next, now) : next, message);
+  setState(autoStart ? start(next, now) : next, message);
   if (!onTime) return;
   playSound(prefs.sound, prefs.volume);
   notify(wasFocus ? 'Boom! Focus session done' : 'Break over', message);
@@ -145,6 +132,7 @@ function render() {
   el.skip.textContent = buttons.skip;
   renderDots();
   drawBomb(getProgress(state, now));
+  setLocked(state.phase === FOCUS && state.status !== 'idle');
 
   document.title = state.status === 'idle'
     ? 'Thinking Time Bomb'
@@ -155,6 +143,10 @@ function startPause() {
   const now = Date.now();
   if (state.status === 'running') {
     setState(pause(state, now));
+    return;
+  }
+  if (state.phase === FOCUS && state.status === 'idle' && !selectedCourse()) {
+    el.status.textContent = askForCourse();
     return;
   }
   // Browsers only allow sound and permission prompts from a user action.
@@ -168,7 +160,7 @@ el.reset.addEventListener('click', () => setState(reset(state)));
 el.skip.addEventListener('click', () => setState(skip(state)));
 
 document.addEventListener('keydown', (event) => {
-  if (el.dialog.open || event.metaKey || event.ctrlKey || event.altKey) return;
+  if (document.querySelector('dialog[open]') || event.metaKey || event.ctrlKey || event.altKey) return;
   if (event.target.closest('input, select, textarea')) return;
   // A focused button already handles Space itself.
   if (event.code === 'Space' && !event.target.closest('button, a')) {

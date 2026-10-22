@@ -17,12 +17,19 @@
       <img class="logo-icon logo-dark" src="assets/icon-dark.svg" width="28" height="35" alt="">
       <span class="word"><span>Thinking Time</span><span class="dot"></span><span class="accent">Bomb</span></span>
     </a>
-    <button id="open-settings" class="icon-btn" type="button" aria-label="Settings">
-      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-    </button>
+    <div class="topbar-actions">
+      <button id="open-log" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 18V5a2 2 0 0 1 2-2h12v15H7a2 2 0 0 0 0 4h12v-4M9 7h6"/></svg>
+        <span>Courses</span>
+      </button>
+      <button id="open-settings" class="nav-btn" type="button">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </div>
   </header>
 
   <main class="stage">
@@ -53,6 +60,11 @@
 
     <p id="time" class="time" role="timer">25:00</p>
 
+    <label class="course-pick">
+      <span id="course-label">Studying</span>
+      <select id="course" aria-labelledby="course-label"></select>
+    </label>
+
     <div class="controls">
       <button id="start-pause" class="btn-primary" type="button">Light the fuse</button>
       <div class="secondary">
@@ -68,8 +80,48 @@
     <kbd>Space</kbd> start / hold · <kbd>R</kbd> re-arm · <kbd>S</kbd> skip
   </footer>
 
+  <dialog id="log" class="drawer" aria-labelledby="log-title">
+    <div class="drawer-body">
+      <div class="drawer-head">
+        <h2 id="log-title" tabindex="-1" autofocus>Courses</h2>
+        <button id="close-log" class="icon-btn" type="button" aria-label="Close courses">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <section>
+        <h3 class="section-title">Today</h3>
+        <div class="tiles">
+          <p class="tile"><span id="today-sessions" class="tile-value">0</span> sessions</p>
+          <p class="tile"><span id="today-time" class="tile-value">0 min</span> focused</p>
+          <p class="tile"><span id="streak" class="tile-value">0</span> day streak</p>
+        </div>
+      </section>
+
+      <section>
+        <h3 class="section-title">Time per course</h3>
+        <div class="segmented">
+          <label><input type="radio" name="range" value="week" checked><span>This week</span></label>
+          <label><input type="radio" name="range" value="all"><span>All time</span></label>
+        </div>
+        <ul id="course-bars" class="bars"></ul>
+        <p id="bars-empty" class="hint">No focus sessions yet. Light a fuse to get started.</p>
+      </section>
+
+      <section>
+        <h3 class="section-title">Courses</h3>
+        <ul id="course-list" class="course-list"></ul>
+        <form id="add-course" class="add-course" novalidate>
+          <input name="name" maxlength="30" autocomplete="off" placeholder="New course, e.g. DAVE3625" aria-label="New course name">
+          <button class="btn-primary" type="submit">Add</button>
+        </form>
+        <p id="course-error" class="errors" role="alert"></p>
+      </section>
+    </div>
+  </dialog>
+
   <dialog id="settings" class="drawer" aria-labelledby="settings-title">
-    <form id="settings-form" novalidate>
+    <form id="settings-form" class="drawer-body" novalidate>
       <div class="drawer-head">
         <h2 id="settings-title" tabindex="-1" autofocus>Settings</h2>
         <button id="close-settings" class="icon-btn" type="button" aria-label="Close settings">

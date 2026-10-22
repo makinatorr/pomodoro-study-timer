@@ -12,6 +12,7 @@ npm test
 |---|---|---|---|
 | 2026-10-22 | F1 timer (`test/timer.test.js`) | 18 | 18 pass |
 | 2026-10-22 | F1 after redesign: progress, auto-start, sessions before long break | 23 | 23 pass |
+| 2026-10-22 | F2 courses (`test/courses.test.js`), F3 stats (`test/stats.test.js`) | 42 | 42 pass, also with `TZ` set to Europe/Oslo, America/New_York, Pacific/Auckland and UTC |
 
 The timer tests use a fake clock: every timer function takes the current time
 as an argument, so a 25-minute session is tested instantly.
@@ -62,11 +63,30 @@ Status: ✅ pass · ❌ fail · ⏳ not tested yet
 
 ### F2 – Courses and session log
 
-⏳ Not built yet.
+| # | Check | Result | Notes |
+|---|---|---|---|
+| 1 | No courses: Light the fuse opens the Courses panel with the add field focused and says "Add a course first" | ✅ 2026-10-22 | |
+| 2 | Add a course: it appears in the list and is selected in the picker | ✅ 2026-10-22 | |
+| 3 | Adding a duplicate name (other letter case) shows an error and adds nothing | ✅ 2026-10-22 | |
+| 4 | Rename: saves on Tab or Enter, picker updates, focus moves on normally | ✅ 2026-10-22 | |
+| 5 | While focus runs: picker disabled, that course's delete button disabled | ✅ 2026-10-22 | |
+| 6 | Focus ends: entry saved with course, start, end and duration; message "Session logged" | ✅ 2026-10-22 | Saved state edited to end 2 s after reload |
+| 7 | Delete a course: gone from list and picker, its time still shows in stats under the old name | ✅ 2026-10-22 | |
+| 8 | Delete the selected course: picker goes back to "Pick a course" | ✅ 2026-10-22 | |
+| 9 | Re-adding a deleted course's name brings back its old sessions | ✅ 2026-10-22 | |
+| 10 | Skip and re-arm during focus log nothing | ⏳ | Covered by unit tests; not checked in the page |
+| 11 | Auto-start focus with no course selected does not start | ⏳ | |
 
 ### F3 – Stats
 
-⏳ Not built yet.
+| # | Check | Result | Notes |
+|---|---|---|---|
+| 1 | Today tiles: sessions, focused time, day streak | ✅ 2026-10-22 | 1 session, 25 min, streak 3 with sample data |
+| 2 | This week vs All time switch: totals per course, highest first, Sunday of last week left out of this week | ✅ 2026-10-22 | Sample sessions added to storage |
+| 3 | Empty state: "No focus sessions yet" | ✅ 2026-10-22 | |
+| 4 | Light and dark mode, phone width (375 px) with no horizontal scroll | ✅ 2026-10-22 | |
+| 6 | Header shows labelled "Courses" and "Settings" buttons; on a phone (375 px) the wordmark hides and both still fit | ✅ 2026-10-22 | |
+| 5 | Session that ends after midnight counts for the new day | ⏳ | Covered by unit tests; not checked in the page |
 
 ### F4 – Picture-in-picture
 

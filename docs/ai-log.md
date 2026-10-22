@@ -135,6 +135,53 @@ black and light blue) and asked for a creative UX based on the brand.
 
 ---
 
+## 2026-10-22 – F2 courses and F3 stats
+
+**What I asked:** Build F2 (courses and session log). I also asked for a view
+of how many hours and minutes I have studied per course, so F3 was built in
+the same step.
+
+**What the AI produced:**
+
+- `js/courses.js` and `js/stats.js`: pure logic for courses (add, rename,
+  delete, name checks) and stats (today, this week, all time, streak).
+  19 new unit tests (42 in total).
+- `js/study.js`: the course picker under the timer and a "Study log" drawer
+  (chart icon) with today's numbers, time per course as bars with a
+  This week / All time switch, and the course list.
+- `js/storage.js`: the `localStorage` helpers, moved out of `app.js` so both
+  modules use them.
+
+**Design choices the AI explained:**
+
+- A deleted course is only marked as deleted, so its sessions keep the name.
+  Adding the same name again brings the course back instead of making a
+  second course with the same name in the stats.
+- The course is locked while a focus session runs, so a session can't change
+  course halfway.
+- Dates use the browser's local time and `setDate` instead of adding 24 hours,
+  because clocks change in Norway on 25 October, inside the test week. The
+  tests were run in four time zones.
+
+**What was wrong / what I tested:**
+
+- Renaming a course rebuilt the list and lost keyboard focus when tabbing
+  out of the field. The AI changed it so a rename doesn't rebuild the list.
+- After a rejected course name, the text stayed in the field and the next
+  name was typed after it. The field now selects the text after an error.
+- Tested in the browser by the AI with sample data (and my own data restored
+  afterwards). Results in `testing.md`.
+
+**What I changed after reviewing it:**
+
+- I found it hard to see that there were courses and settings, because the
+  header only had two small icons. The AI changed them to labelled
+  "Courses" and "Settings" buttons, renamed the "Study log" panel to
+  "Courses", and put a "Studying" label in front of the course picker. On
+  phones the wordmark next to the logo hides so the buttons fit.
+
+---
+
 <!-- Template for later entries:
 
 ## YYYY-MM-DD – <topic>
