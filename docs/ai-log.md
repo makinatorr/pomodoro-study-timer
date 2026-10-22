@@ -98,9 +98,10 @@ background tab for 30+ minutes, Firefox and Safari.
 ## 2026-10-22 – Redesign: Thinking Time Bomb brand
 
 **What I asked:** I didn't like the UX and wanted it minimal but nicer, with
-more ways to customise it. I then gave the AI a logo handoff I had made
-(Thinking Time Bomb: a clock that is also a bomb, slanted Archivo wordmark,
-black and light blue) and asked for a creative UX based on the brand.
+more ways to customise it. I then gave the AI a logo handoff I had made with
+AI (Thinking Time Bomb: a clock that is also a bomb, slanted Archivo
+wordmark, black and light blue) and asked for a creative UX based on the
+brand.
 
 **What the AI produced:**
 

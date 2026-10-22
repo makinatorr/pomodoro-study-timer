@@ -76,8 +76,9 @@ The idea, a Pomodoro timer that logs study time per course, is mine. I
 planned and built the app with Claude Code: we turned the idea into a spec
 before any code, then the AI wrote most of the code and tests and explained
 its choices, and I reviewed each step, tested it and asked for changes (for
-example the redesign around my own logo, clearer buttons and a slimmer
-pop-out). What I asked for, what it produced, what was wrong and what I
+example the redesign around my logo, clearer buttons and a slimmer
+pop-out). I also made the logo and brand (the bomb-clock icon, wordmark and
+colours) with AI. What I asked for, what it produced, what was wrong and what I
 changed is logged per session in [docs/ai-log.md](docs/ai-log.md).
 
 ## Docs
