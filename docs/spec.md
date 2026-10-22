@@ -146,8 +146,8 @@ slanted Archivo 900 wordmark, ink #111418 and light blue #6cbcec).
 
 ## Submission
 
-- Demo link: GitHub Pages URL.
-- Source code: GitHub repository.
+- Demo link: https://makinatorr.github.io/thinking-time-bomb/
+- Source code: https://github.com/makinatorr/thinking-time-bomb
 - Short description: from `README.md`.
 - Deadline: Saturday 25 October 2026, 23:00.
 

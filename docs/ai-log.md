@@ -25,9 +25,9 @@ plan before writing any code.
   could not run it without logging into StudentWeb with real grades (personal
   data), it contained an undisclosed usage ping, and its logic was not
   testable.
-- I switched to a Pomodoro app. The AI proposed the angle of tagging each
-  focus session with a course and showing time per course, so it is more than
-  a generic timer.
+- I switched to a Pomodoro app with my own angle: tagging each focus session
+  with a course and showing time per course, so it is more than a generic
+  timer. The AI helped turn it into the spec.
 
 **Decisions:**
 
