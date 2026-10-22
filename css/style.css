@@ -107,9 +107,12 @@ body[data-mode="dark"] .logo-light { display: none; }
 }
 
 .icon-btn:hover { background: var(--tint); }
-.icon-btn:focus-visible { outline-width: 2px; outline-offset: 0; }
 
-.icon-btn svg {
+.icon-btn:focus-visible,
+.step:focus-visible { outline-width: 2px; outline-offset: 0; }
+
+.icon-btn svg,
+.step svg {
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -236,15 +239,6 @@ body.final-seconds .bomb { animation: wobble 0.5s ease-in-out infinite; }
   --angle: calc(var(--i) * 45deg);
 }
 
-.burst span:nth-child(1) { --i: 0; }
-.burst span:nth-child(2) { --i: 1; }
-.burst span:nth-child(3) { --i: 2; }
-.burst span:nth-child(4) { --i: 3; }
-.burst span:nth-child(5) { --i: 4; }
-.burst span:nth-child(6) { --i: 5; }
-.burst span:nth-child(7) { --i: 6; }
-.burst span:nth-child(8) { --i: 7; }
-
 .bomb-wrap.boom .burst span { animation: burst 0.9s cubic-bezier(0.2, 0.7, 0.3, 1) forwards; }
 .bomb-wrap.boom .bomb { animation: boom 0.6s ease-out; }
 
@@ -263,7 +257,6 @@ body.final-seconds .bomb { animation: wobble 0.5s ease-in-out infinite; }
 
 .time {
   margin: 0;
-  font-family: var(--display);
   font-weight: 900;
   font-size: clamp(4.5rem, 21vw, 7rem);
   letter-spacing: -0.03em;
@@ -456,19 +449,11 @@ legend {
   transition: background-color 0.15s, transform 0.1s;
 }
 
-.step svg {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
+.step svg { width: 14px; height: 14px; }
 
 .step:hover:not(:disabled) { background: var(--tint); }
 .step:active:not(:disabled) { transform: scale(0.9); }
 .step:disabled { opacity: 0.3; cursor: default; }
-.step:focus-visible { outline-width: 2px; outline-offset: 0; }
 
 .field input[type="range"] {
   width: var(--control-width);

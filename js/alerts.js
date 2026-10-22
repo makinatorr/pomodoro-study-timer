@@ -46,7 +46,7 @@ export function askNotificationPermission() {
 export function notify(title, body) {
   if (!('Notification' in window) || Notification.permission !== 'granted') return;
   try {
-    new Notification(title, { body, tag: 'pomodoro-phase', icon: 'assets/favicon.svg' });
+    new Notification(title, { body, tag: 'ttb-phase', icon: 'assets/favicon.svg' });
   } catch {
     // Some mobile browsers only allow notifications from a service worker.
   }

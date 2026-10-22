@@ -1,5 +1,5 @@
 import {
-  PHASE_LABELS, DEFAULT_SETTINGS, LIMITS, FOCUS, LONG_BREAK,
+  PHASE_LABELS, LIMITS, FOCUS, LONG_BREAK,
   createTimer, start, pause, reset, skip, tick, getRemaining, getProgress,
   shouldAutoStart, validateSetting, applySettings, formatTime,
 } from './timer.js';
@@ -36,7 +36,7 @@ const el = {
 };
 const darkQuery = matchMedia('(prefers-color-scheme: dark)');
 
-let state = load(STORAGE_KEY, isValidState) ?? createTimer(DEFAULT_SETTINGS);
+let state = load(STORAGE_KEY, isValidState) ?? createTimer();
 let prefs = { ...DEFAULT_PREFS, ...load(PREFS_KEY, Boolean) };
 let endTimeout = null;
 

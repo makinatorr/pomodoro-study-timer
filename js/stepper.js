@@ -47,9 +47,10 @@ export function setupStepper(root, { min, max, label }) {
   }
 
   for (const [button, delta] of [[down, -1], [up, 1]]) {
-    // Keyboard and quick clicks step once; a held pointer has already stepped.
-    button.addEventListener('click', () => {
-      if (!repeated) step(delta);
+    // Keyboard (detail 0) and quick clicks step once; a held pointer has
+    // already stepped.
+    button.addEventListener('click', (event) => {
+      if (event.detail === 0 || !repeated) step(delta);
       repeated = false;
     });
     button.addEventListener('pointerdown', () => {
